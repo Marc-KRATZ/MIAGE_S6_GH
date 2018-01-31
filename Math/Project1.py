@@ -8,9 +8,10 @@ while i < 100:
 	i += 1
 
 print (i)
+i = 0
 
-result=''
-for nb in nbAlea:
-	result += str(nb) + " "
+while i < 100:
+	print('{0:8} {1:8} {2:10} {3:10}'.format(nbAlea[i],nbAlea[i+1],nbAlea[i+2],nbAlea[i+3]))
+	i += 4
 
-print(result)
+
