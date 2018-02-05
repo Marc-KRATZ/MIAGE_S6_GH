@@ -16,7 +16,7 @@ print ("Liste des nombres :\n")
 i = 0
 
 while i < 100:
-	print('{0:8} {1:8} {2:10} {3:10} {4:10}'.format(nbAlea[i],nbAlea[i+1],nbAlea[i+2],nbAlea[i+3],nbAlea[i+4]))
+	print('{0:10} {1:10} {2:10} {3:10} {4:10}'.format(nbAlea[i],nbAlea[i+1],nbAlea[i+2],nbAlea[i+3],nbAlea[i+4]))
 	i += 5
 
 def effectifInter(a,b,tab):
@@ -68,18 +68,78 @@ print("\n")
 
 print("Exercice 2")
 
-
 lettre = ["A","B","C","D"]
-mot = ""
+mot = []
 i = 0
 
 while i<7:
-	mot += random.choice(lettre)
+	mot.append(random.choice(lettre))
 	i += 1
 
+print(mot)
+print(mot[0])
+
+
+def verifMot(mot, Amot):
+	nblettre1 = [0,0,0,0]
+	nblettre2 = [0,0,0,0]
+	i = 0
+	for value in mot:
+		if value == "A":
+			nblettre1[0] += 1
+		if value == "B":
+			nblettre1[1] += 1
+		if value == "C":
+			nblettre1[2] += 1
+		if value == "D":
+			nblettre1[3] += 1
+
+	for value in Amot:
+		if value == "A":
+			nblettre2[0] += 1
+		if value == "B":
+			nblettre2[1] += 1
+		if value == "C":
+			nblettre2[2] += 1
+		if value == "D":
+			nblettre2[3] += 1
+
+	while i<4:
+		if(nblettre1[i]<nblettre2[i]):
+			return False
+		i += 1
+	return True
 
 
 
+def testAjoutLettre(mot, Amot, lettre):
+	return verifMot(mot, Amot+lettre)
+
+
+def ajoutLettre(mot, Amot, lettre):
+	result = []
+	for value in lettre:
+		if (testAjoutLettre(mot, Amot, value)):
+			resultat.append(Amot+value)
+	return result
+
+"""
+def ajoutelettresliste(mot, Amot, lettre):
+	result = []
+	for value in Amot:
+		result.append(ajoutLettre(mot,value,lettre))
+	return result
+
+test = []
+for value in mot:
+	test.append(ajoutelettresliste(mot,test,lettre))
+"""
+
+print(ajoutLettre(mot,'ABA',lettre))
+
+"""
+print(testAjoutLettre(mot,'ABA','C'))
+"""
 quit = ""
 while quit != "q":
 	quit = input("Pour quitter entrez q : ")
