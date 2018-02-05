@@ -110,13 +110,7 @@ def verifMot(mot, Amot):
 	return True
 
 
-
-def testAjoutLettre(mot, Amot, lettre):
-	return verifMot(mot, Amot+lettre)
-
-
 def trouve(mot, lettre):
-
 	result = []
 	test = False
 	for v1 in lettre:
@@ -133,12 +127,12 @@ def trouve(mot, lettre):
 									if test == False:
 										result.append(v1+v2+v3+v4+v5+v6+v7)
 									test = False
-
 	return result
 
-print(testAjoutLettre(mot,'ABA','C'))
+anagram = trouve(mot,lettre)
 
-print(trouve(mot,lettre))
+for value in anagram:
+	print(value)
 
 
 
