@@ -69,15 +69,14 @@ print("\n")
 print("Exercice 2")
 
 lettre = ["A","B","C","D"]
-mot = []
+mot = ""
 i = 0
 
 while i<7:
-	mot.append(random.choice(lettre))
+	mot+=random.choice(lettre)
 	i += 1
 
 print(mot)
-print(mot[0])
 
 
 def verifMot(mot, Amot):
@@ -116,30 +115,33 @@ def testAjoutLettre(mot, Amot, lettre):
 	return verifMot(mot, Amot+lettre)
 
 
-def ajoutLettre(mot, Amot, lettre):
+def trouve(mot, lettre):
+
 	result = []
-	for value in lettre:
-		if (testAjoutLettre(mot, Amot, value)):
-			resultat.append(Amot+value)
+	test = False
+	for v1 in lettre:
+		for v2 in lettre:
+			for v3 in lettre:
+				for v4 in lettre:
+					for v5 in lettre:
+						for v6 in lettre:
+							for v7 in lettre:
+								if verifMot(mot,v1+v2+v3+v4+v5+v6+v7):
+									for t in result:
+										if t == v1+v2+v3+v4+v5+v6+v7:
+											test = True
+									if test == False:
+										result.append(v1+v2+v3+v4+v5+v6+v7)
+									test = False
+
 	return result
 
-"""
-def ajoutelettresliste(mot, Amot, lettre):
-	result = []
-	for value in Amot:
-		result.append(ajoutLettre(mot,value,lettre))
-	return result
-
-test = []
-for value in mot:
-	test.append(ajoutelettresliste(mot,test,lettre))
-"""
-
-print(ajoutLettre(mot,'ABA',lettre))
-
-"""
 print(testAjoutLettre(mot,'ABA','C'))
-"""
+
+print(trouve(mot,lettre))
+
+
+
 quit = ""
 while quit != "q":
 	quit = input("Pour quitter entrez q : ")
