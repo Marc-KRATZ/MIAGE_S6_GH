@@ -76,7 +76,7 @@ while i<7:
 	mot+=random.choice(lettre)
 	i += 1
 
-print(mot)
+print("\nMot de 7 lettres \"" + mot + "\" et voici ces anagrammes :\n")
 
 
 def verifMot(mot, Amot):
