@@ -2,5 +2,4 @@
 
 Commande à exécuter dans le terminal :
 
-Python Exercice1.py
-Python Exercice2.py
+python exo 5 2 10000
