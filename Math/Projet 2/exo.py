@@ -22,7 +22,6 @@ def div_cinq(a):
     else:
         return round((a-(res/100)),2)
 
-
 def init_prix_stock(b,s):
     tab = []
     n = 0
@@ -45,20 +44,69 @@ def calcul_prob(b,tab):
         tab[i].append(round(pt/tab[i][0],3))
         i+=1
 
+def defini_une_biere(tab,b):
+    i = 0
+    x = random.random()
+    somme = 0
+
+    while somme < x and i < b:
+        somme += tab[i][2];
+        i+=1
+    return i
+
+def rep_premier_achat(tab,n,b):
     i=0
     while i<b:
-        tab[i].append((pt/tab[i][0])*n)
+        tab[i].append(0)
         i+=1
 
+    i=0
+    while i<n:
+        tab[defini_une_biere(tab,b)-1][3]+=1
+        i+=1
+
+def simule_vente(tab,b,s):
+    i=0
+    sominit=0
+    somfinal=0
+    while i<b:
+        sominit+=tab[i][0]*2
+        i+=1
+    i=0
+    while i<(b*s):
+        sortie = ''
+        biere = defini_une_biere(tab,b)
+        while tab[biere-1][1]==0:
+            biere = defini_une_biere(tab,b)
+        j=0
+        while j<b:
+            if j==biere-1:
+                somfinal+= tab[biere-1][0]
+                tab[biere-1][1]-=1
+                tab[biere-1][0]+=(5*(b-1))/100
+                if tab[biere-1][1] == 0:
+                    tab[biere-1][0] = 0.00
+            else:
+                if tab[j][1]!=0:
+                    tab[j][0]-=0.05
+            sortie += '{:.2f}'.format(tab[j][0]) + " "
+            j+=1
+        print(sortie)
+        i+=1
+    print('{:.2f}'.format(somfinal-sominit))
+
+#defini la range 0 et 1
 tab = init_prix_stock(b,s)
-print(tab)
+#defini la range 2
 calcul_prob(b,tab)
-print(tab)
+#defini la range 3
+rep_premier_achat(tab,n,b)
+
 
 ligne1 = ''
 ligne2 = ''
 ligne3 = ''
-ligne4 = ''
+
 
 for value in tab:
     ligne1 += '{:.2f}'.format(value[0]) + " "
@@ -67,9 +115,10 @@ for value in tab:
     ligne2 += '{:.3f}'.format(value[2]) + " "
 
 for value in tab:
-    ligne3 += '{:.0f}'.format(value[3]) + " "
+    ligne3 += '{:d}'.format(value[3]) + " "
+
 
 print(ligne1)
 print(ligne2)
 print(ligne3)
-print(ligne4)
+simule_vente(tab,b,s)
