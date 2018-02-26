@@ -2,11 +2,15 @@ import sys
 import os
 import random
 
+
 try:
     if len(sys.argv) != 4:
         raise Exception()
 except Exception:
-    print ("Il faut 3 argument pour que le programme fonctionne")
+    print ("/!------------------------------------------------------!\\")
+    print ("/! Il faut 3 arguments pour que le programme fonctionne !\\")
+    print ("/!------------------------------------------------------!\\")
+    exit()
 
 b = int(sys.argv[1])
 s = int(sys.argv[2])
@@ -22,6 +26,7 @@ def div_cinq(a):
     else:
         return round((a-(res/100)),2)
 
+#initialise les prix de chaque biere ainsi que le stock
 def init_prix_stock(b,s):
     tab = []
     n = 0
@@ -30,6 +35,7 @@ def init_prix_stock(b,s):
         n += 1
     return tab
 
+#calcul de chaque prob des bieres
 def calcul_prob(b,tab):
     pt=0
     p=0
@@ -44,6 +50,7 @@ def calcul_prob(b,tab):
         tab[i].append(round(pt/tab[i][0],3))
         i+=1
 
+#prendre une biere d'apres la probabilite et en utilisant une fonction random entre 0 et 1
 def defini_une_biere(tab,b):
     i = 0
     x = random.random()
@@ -54,6 +61,7 @@ def defini_une_biere(tab,b):
         i+=1
     return i
 
+#repetition du premier achat suivant n
 def rep_premier_achat(tab,n,b):
     i=0
     while i<b:
@@ -65,6 +73,7 @@ def rep_premier_achat(tab,n,b):
         tab[defini_une_biere(tab,b)-1][3]+=1
         i+=1
 
+#simule la vente de toutes les bieres
 def simule_vente(tab,b,s):
     i=0
     sominit=0
