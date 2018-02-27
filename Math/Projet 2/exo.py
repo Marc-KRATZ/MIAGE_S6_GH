@@ -36,7 +36,7 @@ def init_prix_stock(b,s):
     return tab
 
 #calcul de chaque prob des bieres
-def calcul_prob(b,tab):
+def calcul_prob_init(b,tab):
     pt=0
     p=0
     i=0
@@ -48,6 +48,25 @@ def calcul_prob(b,tab):
     pt = 1/p
     while i<b:
         tab[i].append(round(pt/tab[i][0],3))
+        i+=1
+
+
+def calcul_prob(b,tab):
+    pt=0
+    p=0
+    i=0
+    while i<b:
+        if tab[i][0] > 0:
+            p = p + 1/tab[i][0]
+        i+=1
+
+    i=0
+    pt = 1/p
+    while i<b:
+        if  tab[i][0] > 0:
+            tab[i][2]=round(pt/tab[i][0],3)
+        else:
+            tab[i][2]=0
         i+=1
 
 #prendre une biere d'apres la probabilite et en utilisant une fonction random entre 0 et 1
@@ -67,7 +86,6 @@ def rep_premier_achat(tab,n,b):
     while i<b:
         tab[i].append(0)
         i+=1
-
     i=0
     while i<n:
         tab[defini_une_biere(tab,b)-1][3]+=1
@@ -79,11 +97,12 @@ def simule_vente(tab,b,s):
     sominit=0
     somfinal=0
     while i<b:
-        sominit+=tab[i][0]*2
+        sominit+=tab[i][0]*s
         i+=1
     i=0
     while i<(b*s):
         sortie = ''
+        calcul_prob(b,tab)
         biere = defini_une_biere(tab,b)
         while tab[biere-1][1]==0:
             biere = defini_une_biere(tab,b)
@@ -107,7 +126,7 @@ def simule_vente(tab,b,s):
 #defini la range 0 et 1
 tab = init_prix_stock(b,s)
 #defini la range 2
-calcul_prob(b,tab)
+calcul_prob_init(b,tab)
 #defini la range 3
 rep_premier_achat(tab,n,b)
 
