@@ -11,22 +11,22 @@
   
 int  main(int argc,char **argv) {
   int x;
-  struct protoent *pp;
+  struct servent *pp;
   
   for (;;) {
 
     errno = 0;
-    if ( !(pp = getprotoent()) )
+    if ( !(pp = getservent()) )
       break;
     
     printf("%s:\n"
-	   "\tProtocol: %d\n"
+	   "\tProtocol: %s\n"
 	   "\tAliases:  ",
-	   pp->p_name,
-	   pp->p_proto);
+	   pp->s_name,
+	   pp->s_proto);
 
-    for ( x=0; pp->p_aliases[x] != NULL; ++x )
-      printf("%s ",pp->p_aliases[x]);
+    for ( x=0; pp->s_aliases[x] != NULL; ++x )
+      printf("%s ",pp->s_aliases[x]);
     putchar('\n');
   }
   
