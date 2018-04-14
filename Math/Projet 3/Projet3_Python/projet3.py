@@ -118,11 +118,11 @@ class Graph(Surface):
     def isInArea(self,x,y):
         test = False
         if (math.exp(x)>=y):
-            #print((x-(x*x*x)-1),y)
             if ((x-(x*x*x)-1)<=y):
                 test = True
         return test
 
+# Execution du programme
 if len(sys.argv) > 1:
     _nbRepet = int(sys.argv[1])
 
